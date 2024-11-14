@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Weather Information</title>
+    
+</head>
+<body>
+    <div class="weather-card">
+        <h2>Weather Information</h2>
+        <div class="search">
+            <label for="fafa" >Entrez une ville :</label>
+            <input type="text"  id="fafa" name="fafa" placeholder="Ex : Paris" required><br><br>
+
+            <button  type="submit"> send a sahbi</button>
+            
+        </div>
+        <div class="weather-info">
+            
+            <p>city: <span id="city">paris</span></p>
+            <p>Temperature: <span id="temp">20°C</span></p>
+            <p>Humidity: <span id="humidity">60%</span></p>
+            <p>Wind Speed: <span id="wind">10 m/s</span></p>
+            
+        </div>
+    </div>
+    <script >
+        const apikey= "3ef83923cca9ff6c43dbd06eb5c5b082";
+        const apiurl="https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+        const search =document.querySelector(".search input");
+        const botona = document.querySelector('.search button');
+
+        async function chekweadther(city){
+            const response =await fetch(apiurl + city+  `&appid=${apikey}`);
+            var data = await response.json();
+            console.log(data);
+            document.querySelector('#city').innerHTML=data.name;
+            document.querySelector('#temp').innerHTML=Math.round(data.main.temp) + " "+"°c";
+            document.querySelector('#humidity').innerHTML=data.main.humidity + " "+"%";
+            document.querySelector('#wind').innerHTML=data.wind.speed + " "+ "km/h";
+        
+        }
+        botona.addEventListener('click', ()=>{
+            chekweadther(search.value);
+
+
+        })
+
+
+        
+
+       
+
+        
+    
+
+
+
+
+    </script>
+</body>
+</html>
